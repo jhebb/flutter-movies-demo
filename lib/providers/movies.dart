@@ -22,7 +22,7 @@ final moviesProvider = FutureProvider<List<Movie>>((ref) async {
   }
 });
 
-final moviesProvider2 = StateNotifierProvider<Movies, MovieResponse>((ref) {
+final moviesProviderWithPaging = StateNotifierProvider<Movies, MovieResponse>((ref) {
   return Movies(ref.read(moviesServiceProvider), ref.watch(movieTypeProvider).state);
 });
 
@@ -35,6 +35,7 @@ class Movies extends StateNotifier<MovieResponse> {
   final MovieType _type;
 
   Future<void> getMovies() async {
+    print('getting movies!');
     try {
       final moviesResponse = await _moviesService.getMovies(_type, state.page);
 
