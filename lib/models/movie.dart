@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import '../utils.dart';
+
 class Movie {
   Movie({
     this.adult = false,
@@ -32,6 +34,10 @@ class Movie {
   final bool video;
   final num voteAverage;
   final num voteCount;
+
+  String get posterPathUrl => Utils.getImageUrl(posterPath);
+
+  String get backdropPathUrl => Utils.getImageUrl(backdropPath, 1280);
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
