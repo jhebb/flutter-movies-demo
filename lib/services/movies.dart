@@ -36,4 +36,15 @@ class MoviesService {
 
     return CreditsResponse.fromJson(response.data);
   }
+
+  Future<MovieResponse> searchMovies(String query, [int page = 1]) async {
+    final response = await _dio.get('/search/movie', queryParameters: {
+      'api_key': Config.API_KEY,
+      'region': 'CA',
+      'page': page,
+      'query': query,
+    });
+
+    return MovieResponse.fromJson(response.data);
+  }
 }

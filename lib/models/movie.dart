@@ -45,7 +45,7 @@ class Movie {
     return Movie(
       adult: json['adult'] ?? false,
       backdropPath: json['backdrop_path'] ?? '',
-      genreIds: json['genre_ids'].cast<int>() ?? <int>[],
+      genreIds: json['genre_ids']?.cast<int>() ?? <int>[],
       id: json['id'],
       originalLanguage: json['original_language'] ?? '',
       originalTitle: json['original_title'] ?? '',

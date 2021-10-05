@@ -1,26 +1,27 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../enums/movie_type.dart';
 import '../models/movie_response.dart';
 import '../services/movies.dart';
-import 'movie_type.dart';
 
-final moviesProviderWithPaging = StateNotifierProvider<Movies, MovieResponse>((ref) {
-  return Movies(ref.read(moviesServiceProvider), ref.watch(movieTypeProvider).state);
+final searchMoviesProviderWithPaging =
+    StateNotifierProvider.autoDispose.family<Movies, MovieResponse, String>((ref, query) {
+  print('recreating provider $query');
+  // TODO should query be passed in from widget or be it's own provider
+  return Movies(ref.read(moviesServiceProvider), query);
 });
 
 class Movies extends StateNotifier<MovieResponse> {
-  Movies(this._moviesService, this._type) : super(MovieResponse.initial()) {
+  Movies(this._moviesService, this._query) : super(MovieResponse.initial()) {
     getMovies();
   }
 
   final MoviesService _moviesService;
-  final MovieType _type;
+  final String _query;
 
   Future<void> getMovies() async {
-    print('getting movies!');
+    print('getting movies for $_query!');
     try {
-      final moviesResponse = await _moviesService.getMovies(_type, state.page);
+      final moviesResponse = await _moviesService.searchMovies(_query, state.page);
 
       state = state.copyWith(
         results: [...state.results, ...moviesResponse.results],

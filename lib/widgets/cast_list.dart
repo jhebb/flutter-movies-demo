@@ -21,21 +21,24 @@ class CastList extends ConsumerWidget {
           itemBuilder: (BuildContext context, int index) {
             final castItem = cast[index];
 
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(castItem.name),
-                const SizedBox(width: 16),
-                Flexible(
-                  child: Text(
-                    castItem.character,
-                    style: const TextStyle(fontStyle: FontStyle.italic),
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: false,
-                    maxLines: 1,
-                  ),
-                )
-              ],
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(castItem.name),
+                  const SizedBox(width: 16),
+                  Flexible(
+                    child: Text(
+                      castItem.character,
+                      style: const TextStyle(fontStyle: FontStyle.italic),
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      maxLines: 1,
+                    ),
+                  )
+                ],
+              ),
             );
           },
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../colors.dart';
 import '../enums/movie_type.dart';
 import '../providers/movie_type.dart';
 
@@ -19,7 +20,7 @@ class MovieTags extends ConsumerWidget {
               onTap: () => context.read(movieTypeProvider).state = type,
               child: Chip(
                 label: Text(type.name),
-                backgroundColor: type == movieType ? Colors.blue : null,
+                backgroundColor: type == movieType ? AppColors.buttonPrimary : null,
               ),
             ),
           )
