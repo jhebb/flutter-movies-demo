@@ -39,6 +39,8 @@ class Movie {
 
   String get backdropPathUrl => Utils.getImageUrl(backdropPath, 1280);
 
+  num get voteAverageRounded => double.parse(voteAverage.toStringAsFixed(1));
+
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       adult: json['adult'] ?? false,

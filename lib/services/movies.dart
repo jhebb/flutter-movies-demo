@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config.dart';
 import '../enums/movie_type.dart';
+import '../models/credits_response.dart';
 import '../models/movie_response.dart';
 import '../providers/dio.dart';
 
@@ -19,5 +20,20 @@ class MoviesService {
         .get('movie/${type.value}', queryParameters: {'api_key': Config.API_KEY, 'region': 'CA', 'page': page});
 
     return MovieResponse.fromJson(response.data);
+  }
+
+  Future<MovieResponse> getRecommendations(num id, [int page = 1]) async {
+    final response = await _dio
+        .get('movie/$id/recommendations', queryParameters: {'api_key': Config.API_KEY, 'region': 'CA', 'page': page});
+
+    return MovieResponse.fromJson(response.data);
+  }
+
+  Future<CreditsResponse> getCredits(num id) async {
+    print('getting credits $id');
+
+    final response = await _dio.get('movie/$id/credits', queryParameters: {'api_key': Config.API_KEY});
+
+    return CreditsResponse.fromJson(response.data);
   }
 }

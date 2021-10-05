@@ -23,11 +23,12 @@ class MovieResponse {
 
   MovieResponse copyWith({List<Movie>? results, int? page, int? totalPages, int? totalResults, String? error}) {
     return MovieResponse(
-        results: results ?? this.results,
-        page: page ?? this.page,
-        error: error ?? this.error,
-        totalPages: totalPages ?? this.totalPages,
-        totalResults: totalResults ?? this.totalResults);
+      results: results ?? this.results,
+      page: page ?? this.page,
+      error: error ?? this.error,
+      totalPages: totalPages ?? this.totalPages,
+      totalResults: totalResults ?? this.totalResults,
+    );
   }
 
   factory MovieResponse.fromJson(Map<String, dynamic> json) {

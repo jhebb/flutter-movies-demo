@@ -1,7 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/config.dart';
+
+import '../config.dart';
 
 final dioProvider = Provider<Dio>((ref) {
-  return Dio(BaseOptions(baseUrl: Config.BASE_URL));
+  final Dio dio = Dio(BaseOptions(baseUrl: Config.BASE_URL));
+
+  // dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options, _) {
+  //   options.headers.addAll({'Authorization': 'Bearer ${Config.API_TOKEN}'});
+  // }));
+
+  return dio;
 });
