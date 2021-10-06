@@ -21,11 +21,8 @@ class Recommendations extends StateNotifier<MovieResponse> {
   bool get hasReachedEnd => (state.page - 1) >= state.totalPages;
 
   Future<void> getRecommendations() async {
-    print('getting recommendations!');
     try {
       final moviesResponse = await _moviesService.getRecommendations(_id, state.page);
-
-      print('got recommendations: ${moviesResponse.totalPages}, ${moviesResponse.totalResults}');
 
       state = state.copyWith(
         results: [...state.results, ...moviesResponse.results],
