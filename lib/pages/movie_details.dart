@@ -105,9 +105,18 @@ class MovieDetailsPage extends ConsumerWidget {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          Text(movie.overview),
-                          CastList(id: movie.id),
-                          RecommendationsList(id: movie.id),
+                          _MovieDetailTab(
+                            title: 'Overview',
+                            child: Text(movie.overview),
+                          ),
+                          _MovieDetailTab(
+                            title: 'Cast',
+                            child: CastList(id: movie.id),
+                          ),
+                          _MovieDetailTab(
+                            title: 'Similar Movies',
+                            child: RecommendationsList(id: movie.id),
+                          ),
                         ],
                       ),
                     ),
@@ -118,6 +127,30 @@ class MovieDetailsPage extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MovieDetailTab extends StatelessWidget {
+  const _MovieDetailTab({required this.child, this.title, Key? key}) : super(key: key);
+
+  final Widget child;
+  final String? title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Column(
+            children: [
+              Text(title!, style: Theme.of(context).textTheme.headline6),
+              const SizedBox(height: 8),
+            ],
+          ),
+        Expanded(child: child),
+      ],
     );
   }
 }

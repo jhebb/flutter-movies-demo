@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/movie.dart';
+import '../providers/settings.dart';
 import 'movie_card.dart';
 
-class MoviesGrid extends StatelessWidget {
+class MoviesGrid extends ConsumerWidget {
   const MoviesGrid({
     this.movies = const [],
     required this.onRefresh,
@@ -16,7 +18,9 @@ class MoviesGrid extends StatelessWidget {
   final void Function(int)? onItemLoaded;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final settings = watch(settingsProvider);
+
     return RefreshIndicator(
       onRefresh: onRefresh,
       child: Center(
@@ -32,7 +36,7 @@ class MoviesGrid extends StatelessWidget {
 
             final Movie movie = movies[index];
 
-            return MovieCard(movie: movie);
+            return MovieCard(movie: movie, isRatingVisible: settings.isRatingsForPreviewsEnabled);
           },
         ),
       ),

@@ -7,9 +7,10 @@ import '../providers/movie.dart';
 import 'movie_rating.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({required this.movie, Key? key}) : super(key: key);
+  const MovieCard({required this.movie, this.isRatingVisible = true, Key? key}) : super(key: key);
 
   final Movie movie;
+  final bool isRatingVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +41,12 @@ class MovieCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: MovieRating(movie.voteAverageRounded, extended: false),
-              ),
+              if (isRatingVisible)
+                Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: MovieRating(movie.voteAverageRounded, extended: false),
+                ),
             ],
           ),
         ),
