@@ -5,6 +5,7 @@ import '../config.dart';
 import '../enums/movie_type.dart';
 import '../models/credits_response.dart';
 import '../models/movie_response.dart';
+import '../models/watch_response.dart';
 import '../providers/dio.dart';
 
 final moviesServiceProvider = Provider((ref) => MoviesService(ref));
@@ -46,5 +47,13 @@ class MoviesService {
     });
 
     return MovieResponse.fromJson(response.data);
+  }
+
+  Future<WatchResponse> getWatchOptions(num id) async {
+    final response = await _dio.get('/movie/$id/watch/providers', queryParameters: {
+      'api_key': Config.API_KEY,
+    });
+
+    return WatchResponse.fromJson(response.data);
   }
 }

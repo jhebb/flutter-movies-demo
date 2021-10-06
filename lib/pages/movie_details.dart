@@ -5,6 +5,7 @@ import '../providers/movie.dart';
 import '../widgets/cast_list.dart';
 import '../widgets/movie_rating.dart';
 import '../widgets/recommendations_list.dart';
+import '../widgets/watch_list.dart';
 
 class MovieDetailsPage extends ConsumerWidget {
   const MovieDetailsPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class MovieDetailsPage extends ConsumerWidget {
     final movie = watch(movieProvider);
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text(movie.title),
@@ -24,6 +25,7 @@ class MovieDetailsPage extends ConsumerWidget {
           tabs: [
             Tab(icon: Icon(Icons.description)),
             Tab(icon: Icon(Icons.people)),
+            Tab(icon: Icon(Icons.tv)),
             Tab(icon: Icon(Icons.lightbulb)),
           ],
         ),
@@ -112,6 +114,10 @@ class MovieDetailsPage extends ConsumerWidget {
                           _MovieDetailTab(
                             title: 'Cast',
                             child: CastList(id: movie.id),
+                          ),
+                          _MovieDetailTab(
+                            title: 'Where to Watch',
+                            child: WatchList(id: movie.id),
                           ),
                           _MovieDetailTab(
                             title: 'Similar Movies',
