@@ -22,6 +22,7 @@ class MovieList extends ConsumerWidget {
 
     return MoviesGrid(
       movies: movies.results,
+      hasReachedEnd: moviesController.hasReachedEnd,
       onRefresh: moviesController.getMovies,
       onItemLoaded: moviesController.handleScrollWithIndex,
     );

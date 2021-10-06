@@ -24,6 +24,7 @@ class RecommendationsList extends ConsumerWidget {
 
     return MoviesGrid(
       movies: movies.results,
+      hasReachedEnd: recommendationsController.hasReachedEnd,
       onRefresh: recommendationsController.getRecommendations,
       onItemLoaded: recommendationsController.handleScrollWithIndex,
     );

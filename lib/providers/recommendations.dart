@@ -5,7 +5,8 @@ import '../services/movies.dart';
 
 // TODO: This is very similar to movies_provider and logic could be re-used by
 //  using/abusing the type param to choose which service call is made
-final recommendationsProviderWithPaging = StateNotifierProvider.family<Recommendations, MovieResponse, num>((ref, id) {
+final recommendationsProviderWithPaging =
+    StateNotifierProvider.autoDispose.family<Recommendations, MovieResponse, num>((ref, id) {
   return Recommendations(ref.read(moviesServiceProvider), id);
 });
 
@@ -16,6 +17,8 @@ class Recommendations extends StateNotifier<MovieResponse> {
 
   final MoviesService _moviesService;
   final num _id;
+
+  bool get hasReachedEnd => (state.page - 1) >= state.totalPages;
 
   Future<void> getRecommendations() async {
     print('getting recommendations!');

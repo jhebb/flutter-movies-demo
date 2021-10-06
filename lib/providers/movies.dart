@@ -17,6 +17,8 @@ class Movies extends StateNotifier<MovieResponse> {
   final MoviesService _moviesService;
   final MovieType _type;
 
+  bool get hasReachedEnd => (state.page - 1) >= state.totalPages;
+
   Future<void> getMovies() async {
     print('getting movies!');
     try {

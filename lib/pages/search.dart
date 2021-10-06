@@ -30,6 +30,7 @@ class SearchPage extends ConsumerWidget {
 
           return MoviesGrid(
             onRefresh: searchMoviesController.getMovies,
+            hasReachedEnd: searchMoviesController.hasReachedEnd,
             movies: movies.results,
             onItemLoaded: searchMoviesController.handleScrollWithIndex,
           );
