@@ -23,8 +23,6 @@ class MoviesGrid extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final settings = watch(settingsProvider);
 
-    print('hasReachedEnd: $hasReachedEnd');
-
     return RefreshIndicator(
       onRefresh: onRefresh,
       child: Center(

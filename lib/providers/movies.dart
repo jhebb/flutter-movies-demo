@@ -19,8 +19,8 @@ class Movies extends StateNotifier<MovieResponse> {
 
   bool get hasReachedEnd => (state.page - 1) >= state.totalPages;
 
+  // TODO: handle refresh scenarios - right now we just requery the last query and add a page
   Future<void> getMovies() async {
-    print('getting movies!');
     try {
       final moviesResponse = await _moviesService.getMovies(_type, state.page);
 

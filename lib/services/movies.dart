@@ -31,8 +31,6 @@ class MoviesService {
   }
 
   Future<CreditsResponse> getCredits(num id) async {
-    print('getting credits $id');
-
     final response = await _dio.get('movie/$id/credits', queryParameters: {'api_key': Config.API_KEY});
 
     return CreditsResponse.fromJson(response.data);
