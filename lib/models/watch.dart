@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:enum_to_string/enum_to_string.dart';
 
 import '../utils.dart';
